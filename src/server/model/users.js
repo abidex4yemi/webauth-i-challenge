@@ -1,7 +1,7 @@
-const userModels = require('../../db/helpers/user-model');
+const create = require('../../db/helpers/user-model');
 
 module.exports = (knex) => {
-  const models = userModels(knex);
+  const models = create(knex);
 
   return {
     ...models,

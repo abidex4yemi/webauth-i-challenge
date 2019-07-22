@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/named
-const { Product } = '../../model';
+const { Product } = require('../../model');
 const { OK, createSuccess } = require('../../util/success');
 const { createError, GENERIC_ERROR } = require('../../util/error');
 
