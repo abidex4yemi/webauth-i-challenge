@@ -19,6 +19,8 @@ app.use(cors());
 app.use(logger('dev'));
 app.use(helmet());
 
+app.get('/', (req, res) => res.status(OK).json(createSuccess({ message: 'Welcome to API root...', data: [] })));
+
 // Handle invalid request
 app.all('*', (req, res) => res.status(NOT_FOUND).json({
   success: false,
