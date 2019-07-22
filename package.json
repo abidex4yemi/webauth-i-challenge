@@ -17,9 +17,20 @@
     "url": "https://github.com/abidex4yemi/webauth-i-challenge/issues"
   },
   "homepage": "https://github.com/abidex4yemi/webauth-i-challenge#readme",
+  "dependencies": {
+    "@hapi/joi": "^15.1.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "helmet": "^3.18.0",
+    "knex": "^0.16.3",
+    "knex-cleaner": "^1.2.1",
+    "morgan": "~1.9.0",
+    "sqlite3": "^4.0.6"
+  },
   "devDependencies": {
     "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^13.2.0",
-    "eslint-plugin-import": "^2.18.2"
+    "eslint-plugin-import": "^2.18.2",
+    "nodemon": "^1.18.10"
   }
 }
