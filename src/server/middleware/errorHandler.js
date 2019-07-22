@@ -1,5 +1,5 @@
 const {
-  BAD_REQUEST, CONFLICT, NOT_FOUND, GENERIC_ERROR,
+  BAD_REQUEST, CONFLICT, NOT_FOUND, GENERIC_ERROR, FORBIDDEN, UNAUTHORIZED,
 } = require('../util/error');
 
 /**
@@ -34,6 +34,30 @@ const badRequest = (err, req, res, next) => {
       message: err.message || 'Bad Request',
       status: err.status,
     },
+  });
+};
+
+const forbidden = (err, req, res, next) => {
+  if (err.status !== FORBIDDEN) {
+    return next(err);
+  }
+
+  return res.status(FORBIDDEN).json({
+    ok: false,
+    message: err.message || 'Forbidden',
+    errors: [err],
+  });
+};
+
+const unauthorized = (err, req, res, next) => {
+  if (err.status !== UNAUTHORIZED) {
+    return next(err);
+  }
+
+  return res.status(UNAUTHORIZED).json({
+    ok: false,
+    message: err.message || 'Unauthorized',
+    errors: [err],
   });
 };
 
@@ -99,4 +123,6 @@ module.exports = {
   notFound,
   resourceConflict,
   genericError,
+  forbidden,
+  unauthorized,
 };
