@@ -9,10 +9,8 @@ export const OK = 200;
  *
  * @param {object} { data, message }
  *
- */ export const createSuccess = ({
-  data,
-  message = 'successful',
-}) => ({
+ */
+export const createSuccess = ({ data, message = 'successful' }) => ({
   success: true,
   message,
   body: data,
