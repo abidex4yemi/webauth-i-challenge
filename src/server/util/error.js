@@ -1,10 +1,10 @@
 /**
  * Define error constants
  */
-export const BAD_REQUEST = 400;
-export const CONFLICT = 409;
-export const NOT_FOUND = 404;
-export const GENERIC_ERROR = 500;
+const BAD_REQUEST = 400;
+const CONFLICT = 409;
+const NOT_FOUND = 404;
+const GENERIC_ERROR = 500;
 
 /**
  * Create new error
@@ -14,9 +14,17 @@ export const GENERIC_ERROR = 500;
  *
  * @returns {object} error
  */
-export const createError = ({ message = 'Internal server error', status = 500 }) => {
+const createError = ({ message = 'Internal server error', status = 500 }) => {
   const error = new Error(message);
   error.status = status;
 
   return error;
+};
+
+module.exports = {
+  createError,
+  BAD_REQUEST,
+  CONFLICT,
+  NOT_FOUND,
+  GENERIC_ERROR,
 };
