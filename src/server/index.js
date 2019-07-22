@@ -4,6 +4,8 @@
 const express = require('express');
 const logger = require('morgan');
 const helmet = require('helmet');
+const session = require('express-session');
+const KnexSessionStore = require('connect-session-knex')(session);
 const cors = require('cors');
 const errorHandler = require('./middleware/errorHandler');
 const { createSuccess, OK } = require('./util/success');
@@ -12,6 +14,20 @@ const productRouter = require('./routes/productsRouter');
 const userRouter = require('./routes/userRouter');
 
 const app = express();
+
+// Setup session cookie
+const store = new KnexSessionStore();
+
+app.use(
+  session({
+    store,
+    name: 'loo',
+    resave: true,
+    saveUninitialized: true,
+    secret: '@@**&&&$$$',
+    cookie: { maxAge: 7 * 24 * 60 * 60 * 1000 }, // 1 week
+  }),
+);
 
 /**
  * Set up middleware
