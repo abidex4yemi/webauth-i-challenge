@@ -19,7 +19,7 @@ const login = async (req, res, next) => {
     const user = await User.getByEmail(credential.email);
 
     if (!user || Object.keys(user).length === 0) {
-      return res.status(NOT_FOUND).json(
+      return next(
         createError({
           message: 'User does not exist',
           status: NOT_FOUND,
@@ -27,10 +27,10 @@ const login = async (req, res, next) => {
       );
     }
 
-    const isPasswordValid = bcrypt.compare(credential.password, user.password);
+    const isPasswordValid = await bcrypt.compare(credential.password, user.password);
 
     if (!isPasswordValid) {
-      return res.status(BAD_REQUEST).json(
+      return next(
         createError({
           message: 'Invalid credential',
           status: BAD_REQUEST,
@@ -41,7 +41,7 @@ const login = async (req, res, next) => {
     return res.status(OK).json(
       createSuccess({
         message: 'Log in successful',
-        data: user.first_name,
+        data: { user: user.first_name },
       }),
     );
   } catch (error) {

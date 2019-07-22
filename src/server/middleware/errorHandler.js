@@ -30,7 +30,10 @@ const badRequest = (err, req, res, next) => {
 
   return res.status(BAD_REQUEST).json({
     ok: false,
-    errors: [err],
+    errors: {
+      message: err.message || 'Bad Request',
+      status: err.status,
+    },
   });
 };
 
