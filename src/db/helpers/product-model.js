@@ -4,7 +4,7 @@
  * @param {Object} knex
  * @returns {Object} {get, insert, update, remove}
  */
-export default (knex) => {
+const create = (knex) => {
   function getAll() {
     return knex('products');
   }
@@ -44,3 +44,5 @@ export default (knex) => {
     getAll,
   };
 };
+
+module.exports = create;
