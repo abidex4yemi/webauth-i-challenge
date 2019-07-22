@@ -1,4 +1,4 @@
-import Joi from '@hapi/joi';
+const Joi = require('@hapi/joi');
 
 /**
  * Validate request body
@@ -31,4 +31,4 @@ const joiValidate = (req, res, next, schema) => {
   return next();
 };
 
-export default joiValidate;
+module.exports = joiValidate;

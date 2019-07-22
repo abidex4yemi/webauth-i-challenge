@@ -1,7 +1,8 @@
 const bcrypt = require('bcryptjs');
 const { User } = require('../../model');
 const { createSuccess, CREATED } = require('../../util/success');
-const { createError, GENERIC_ERROR } = require('../../util/error');
+const { createError, GENERIC_ERROR, CONFLICT } = require('../../util/error');
+
 /**
  * Create new user
  *
@@ -13,9 +14,7 @@ const createUser = async (req, res, next) => {
   try {
     const userDetails = req.body.sanitizedBody;
 
-    const salt = bcrypt.genSalt(10);
-
-    userDetails.password = bcrypt.hash(userDetails.password, salt);
+    userDetails.password = await bcrypt.hash(userDetails.password, 10);
 
     const user = await User.createUser(userDetails);
 
@@ -26,6 +25,15 @@ const createUser = async (req, res, next) => {
       }),
     );
   } catch (error) {
+    if (error && error.code === 'SQLITE_CONSTRAINT') {
+      return next(
+        createError({
+          message: 'User already exist',
+          status: CONFLICT,
+        }),
+      );
+    }
+
     return next(
       createError({
         message: 'Could not create new user',

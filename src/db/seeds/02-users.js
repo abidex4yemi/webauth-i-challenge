@@ -8,11 +8,5 @@ exports.seed = function (knex, Promise) {
       email: 'john@gmail.com',
       password: '$2b$12$3DLHQshuQu4E5ne9H5H5ReqygL4iMNpG/kP3Bg8kGWdgJ7d/W7Qpa',
     },
-    {
-      first_name: 'Jane',
-      last_name: 'Smith',
-      email: 'jane@gmail.com',
-      password: '$2b$12$3DLHQshuQu4E5ne9H5H5ReqygL4iMNpG/kP3Bg8kGWdgJ7d/W7Qpa',
-    },
   ]);
 };

@@ -1,8 +1,8 @@
 // Export all utility files
 const allErrorHandler = require('./errorHandler');
-const validateActionParam = require('./validateUserBody');
+const validateUserBody = require('./validateUserBody');
 
 module.exports = {
   allErrorHandler,
-  validateActionParam,
+  validateUserBody,
 };

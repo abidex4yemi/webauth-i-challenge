@@ -12,7 +12,12 @@ const create = (knex) => {
   function getById(id) {
     return knex('users')
       .where({ id })
-      .first();
+      .then(user => ({
+        email: user[0].email,
+        first_name: user[0].first_name,
+        id: user[0].id,
+        last_name: user[0].last_name,
+      }));
   }
 
   function createUser(user) {
