@@ -36,7 +36,7 @@ const create = (knex) => {
 
   // User is the model name
   return {
-    name: 'Products',
+    name: 'Product',
     getById,
     insert,
     update,
