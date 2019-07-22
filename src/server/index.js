@@ -25,7 +25,7 @@ app.use(
     resave: true,
     saveUninitialized: true,
     secret: '@@**&&&$$$',
-    cookie: { maxAge: 7 * 24 * 60 * 60 * 1000 }, // 1 week
+    cookie: { maxAge: 60 * 60 * 60 * 24 }, // 1 week
   }),
 );
 

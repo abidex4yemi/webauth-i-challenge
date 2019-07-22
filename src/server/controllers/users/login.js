@@ -38,6 +38,8 @@ const login = async (req, res, next) => {
       );
     }
 
+    req.session.userId = user.id;
+
     return res.status(OK).json(
       createSuccess({
         message: 'Log in successful',
