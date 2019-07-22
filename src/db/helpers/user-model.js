@@ -15,7 +15,7 @@ const create = (knex) => {
       .first();
   }
 
-  function insert(user) {
+  function createUser(user) {
     return knex('users')
       .insert(user)
       .then(([id]) => getById(id));
@@ -38,10 +38,11 @@ const create = (knex) => {
   return {
     name: 'User',
     getById,
-    insert,
+    create,
     update,
     remove,
     getAll,
+    createUser,
   };
 };
 
