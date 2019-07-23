@@ -14,7 +14,7 @@ const logout = (req, res, next) => {
         return next(err);
       }
 
-      return next(
+      return res.status(OK).json(
         createSuccess({
           message: 'Logged out successfully',
           status: OK,

@@ -2,7 +2,7 @@ const { createError, UNAUTHORIZED } = require('../util/error');
 
 const checkLoggedIn = (req, res, next) => {
   // check if user is logged in
-  if (req.session) {
+  if (req.session && req.session.userID) {
     return next();
   }
 

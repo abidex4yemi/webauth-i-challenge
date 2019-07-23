@@ -38,7 +38,7 @@ const login = async (req, res, next) => {
       );
     }
 
-    req.session.userId = user.id;
+    req.session.userID = user.id;
 
     return res.status(OK).json(
       createSuccess({

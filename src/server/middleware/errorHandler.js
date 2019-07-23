@@ -118,11 +118,22 @@ const genericError = (err, req, res, next) => res.status(GENERIC_ERROR).json({
   errors: [err],
 });
 
-module.exports = {
+/**
+ * Package all error handlers as object
+ */
+const errorsObject = {
   badRequest,
   notFound,
   resourceConflict,
-  genericError,
   forbidden,
   unauthorized,
+  genericError,
 };
+
+/**
+ * Export all error middleware as an array
+ *
+ */
+const allErrorHandler = () => Object.keys(errorsObject).map(key => errorsObject[key]);
+
+module.exports = allErrorHandler;

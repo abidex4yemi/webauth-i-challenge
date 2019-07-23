@@ -36,8 +36,6 @@ const userSchema = Joi.object().keys({
 /**
  * Validate user body against defined schema
  */
-const validateUserBody = (req, res, next) => {
-  joiValidate(req, res, next, userSchema);
-};
+const validateUserBody = (req, res, next) => joiValidate(req, res, next, userSchema);
 
 module.exports = validateUserBody;

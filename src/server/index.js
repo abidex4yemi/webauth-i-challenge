@@ -7,7 +7,9 @@ const helmet = require('helmet');
 const session = require('express-session');
 const KnexSessionStore = require('connect-session-knex')(session);
 const cors = require('cors');
-const errorHandler = require('./middleware/errorHandler');
+
+const allErrorHandler = require('./middleware/errorHandler');
+const knex = require('../config/database');
 const { createSuccess, OK } = require('./util/success');
 const { NOT_FOUND } = require('./util/error');
 const productRouter = require('./routes/productsRouter');
@@ -16,16 +18,26 @@ const userRouter = require('./routes/userRouter');
 const app = express();
 
 // Setup session cookie
-const store = new KnexSessionStore();
+const store = new KnexSessionStore({
+  knex, // configured instance of knex
+  tablename: 'sessions', // table that will store sessions inside the db, name it anything you want
+  sidfieldname: 'sid', // column that will hold the session id, name it anything you want
+  createtable: true, // if the table does not exist, it will create it automatically
+  clearInterval: 1000 * 60 * 60,
+});
 
 app.use(
   session({
-    store,
-    name: 'loo',
+    name: 'waterloo',
     resave: true,
     saveUninitialized: true,
     secret: '@@**&&&$$$',
-    cookie: { maxAge: 60 * 60 * 60 * 24 }, // 1 week
+    cookie: {
+      maxAge: 1000 * 60 * 24,
+      secure: false,
+      httpOnly: true,
+    },
+    store,
   }),
 );
 
@@ -51,6 +63,6 @@ app.all('*', (req, res) => res.status(NOT_FOUND).json({
 
 // handle all application error
 // eslint-disable-next-line max-len
-app.use([errorHandler.badRequest, errorHandler.notFound, errorHandler.resourceConflict, errorHandler.genericError]);
+app.use(allErrorHandler());
 
 module.exports = app;
